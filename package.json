@@ -1,0 +1,23 @@
+{
+  "name": "identity-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "awesome-phonenumber": "^5.6.0",
+    "axios": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mongoose": "^7.1.0",
+    "paystack-api": "^2.0.6",
+    "truecallerjs": "^1.1.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
