@@ -12,3 +12,6 @@ utils/waste.txt
 coverage
 test/db/test waste.txt
 .vercel
+test/fixtures/keys/client-cert.pem
+test/fixtures/keys/client-key.pem
+test/fixtures/keys/client.csr
