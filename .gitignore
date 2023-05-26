@@ -2,5 +2,6 @@ node_modules
 .env
 .vercel
 test
-/config
+config/environment.rb
 .sample_env
+config/.sample_environment.rb
