@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import { Schema } from "mongoose";
 
-const dataSchema = new mongoose.Schema({
+const dataSchema = new Schema({
  name: {
   type: String,
  },
@@ -54,6 +54,6 @@ const dataSchema = new mongoose.Schema({
  },
 });
 
-module.exports = {
+export {
  dataSchema,
 };

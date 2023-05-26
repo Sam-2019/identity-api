@@ -6,15 +6,15 @@ const NODE_ENV = process.env.NODE_ENV;
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const TRUECALLER = process.env.TRUECALLER;
 
-const NOTIFY = (instance, port) => {
+const NOTIFY = (port) => {
  console.log(
   NODE_ENV === "production"
    ? `server live`
-   : `server live on ${instance}://localhost:${port}`
+   : `server live on http://localhost:${port}`
  );
 };
 
-module.exports = {
+export {
  NIMBLE,
  DEV_DB,
  NOTIFY,

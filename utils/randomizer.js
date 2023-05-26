@@ -18,6 +18,4 @@ const getRandomItem = () => {
  return values[Math.floor(Math.random() * values.length)];
 };
 
-module.exports = {
- getRandomItem,
-};
+export { getRandomItem };

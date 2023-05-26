@@ -1,10 +1,10 @@
-const { parsePhoneNumber } = require("awesome-phonenumber");
-const { AUTH_KEY } = require("../utils/config");
-const { getTelcoCode, getTelcoName } = require("../utils/constants");
-const { stack, caller } = require("../utils/identity");
-const { transformText, getCountryName } = require("../utils/transformer");
-const { getRandomItem } = require("../utils/randomizer");
-const { addIdentity, getIdentity } = require("../db/repository");
+import { parsePhoneNumber } from "awesome-phonenumber";
+import { AUTH_KEY } from "../utils/config.js";
+import { getTelcoCode, getTelcoName } from "../utils/constants.js";
+import { stack, caller } from "../utils/identity.js";
+import { transformText, getCountryName } from "../utils/transformer.js";
+import { getRandomItem } from "../utils/randomizer.js";
+import { addIdentity, getIdentity } from "../db/repository/index.js";
 
 const getID = async (req, res) => {
  const randomImage = getRandomItem();
@@ -34,7 +34,7 @@ const getID = async (req, res) => {
  const info = await caller(pn, res);
  const transformer = JSON.parse(info);
  const truecaller = transformer.data;
- 
+
  const output = {
   name: paystack.account_name ? paystack.account_name : null,
   account_number: paystack.account_number ? paystack.account_number : null,
@@ -64,12 +64,12 @@ const getID = async (req, res) => {
    truecaller[0].phones.length === 0
     ? null
     : truecaller[0].phones[0].countryCode,
-    paystackPayload: paystack,
-    telegramPayload: truecaller[0]
+  paystackPayload: paystack,
+  telegramPayload: truecaller[0],
  };
 
  addIdentity(output);
  return res.json(output);
 };
 
-module.exports = { getID };
+export { getID };

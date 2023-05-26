@@ -1,8 +1,8 @@
-require("dotenv").config();
-var http = require("http");
-const app = require("./app");
-const { NOTIFY } = require("./utils/config");
+import './loadEnv.js'
+import { createServer } from "https";
+import app from "./app.js";
+import { NOTIFY } from "./utils/config.js";
 
 const PORT = 4000;
 
-http.createServer(app).listen(PORT , () => { NOTIFY('http', PORT) })
+createServer(app).listen(PORT , () => { NOTIFY(PORT) })

@@ -1,4 +1,4 @@
-const Model = require("../model");
+import Model from "../model/index.js";
 
 const getIdentity = async (phone) => {
  return await Model.findOne({ phone });
@@ -8,7 +8,7 @@ const addIdentity = async (data) => {
  return await Model.create(data);
 };
 
-module.exports = {
+export {
  getIdentity,
  addIdentity,
 };

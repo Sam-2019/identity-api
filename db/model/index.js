@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
-const { dataSchema } = require("../schema/identity");
+import { model } from "mongoose";
+import { dataSchema } from "../schema/identity.js";
 
-module.exports = mongoose.model("Identity", dataSchema);
+export default model("Identity", dataSchema);
