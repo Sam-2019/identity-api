@@ -47,11 +47,12 @@ task :deploy do
   deploy do
     comment "Deploying #{fetch(:application_name)} to #{fetch(:domain)}:#{fetch(:deploy_to)}}"
     invoke :"git:clone"
-    invoke :"yarn:install"
     invoke :"deploy:cleanup"
 
     on :launch do
       invoke :remote_environment
+      invoke :yarn_install
+      invoke :start_app
     end
   end
 end
@@ -60,3 +61,16 @@ desc 'spits comments'
 task :restart do
   comment 'Restart application'
 end
+
+desc 'install yarn packages'
+task :yarn_install do
+  command %(yarn install)
+end
+
+desc 'start app'
+task :start_app do
+  command %(pm2 flush)
+  command %(pm2 delete 0)
+  command %(pm2 start index.js --name identity-api)
+end
+
