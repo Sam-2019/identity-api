@@ -1,4 +1,3 @@
-const PORT = process.env.PORT;
 const NIMBLE = process.env.NIMBLE;
 const DEV_DB = process.env.DEV_DB;
 const PROD_DB = process.env.PROD_DB;
@@ -16,7 +15,6 @@ const NOTIFY = (instance, port) => {
 };
 
 module.exports = {
- PORT,
  NIMBLE,
  DEV_DB,
  NOTIFY,
