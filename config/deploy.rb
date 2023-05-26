@@ -7,7 +7,13 @@ require_relative 'environment'
   set :application_name, "#{ENV['app']}"
   set :domain, "#{ENV['domain']}"
   set :deploy_to, "#{ENV['home_dir']}/#{ENV['app']}"
+  set :repository, "#{ENV['repository']}"
+  set :branch, "master"
   set :rvm_use_path, '/usr/local/rvm/scripts/rvm'
+  
+  set :execution_mode, :system
+  set :init_system, :systemd
+  set :service_unit_path, "/etc/systemd/system"
 
 # Optional settings:
   set :term_mode, :pretty
