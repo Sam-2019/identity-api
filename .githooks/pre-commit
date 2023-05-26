@@ -1,6 +1,0 @@
-#!/bin/sh
-# This file is `.git/hooks/pre-commit` and it has been `chmod +x`'d
-
-.githooks/format-ruby
-.githooks/format-javascript
-.githooks/lint-javascript
