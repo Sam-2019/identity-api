@@ -34,7 +34,7 @@ const getID = async (req, res) => {
  const info = await caller(pn, res);
  const transformer = JSON.parse(info);
  const truecaller = transformer.data;
-
+ 
  const output = {
   name: paystack.account_name ? paystack.account_name : null,
   account_number: paystack.account_number ? paystack.account_number : null,
@@ -64,6 +64,8 @@ const getID = async (req, res) => {
    truecaller[0].phones.length === 0
     ? null
     : truecaller[0].phones[0].countryCode,
+    paystackPayload: paystack,
+    telegramPayload: truecaller[0]
  };
 
  addIdentity(output);
