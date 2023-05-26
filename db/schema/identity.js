@@ -46,6 +46,12 @@ const dataSchema = new mongoose.Schema({
  countryCode: {
   type: String,
  },
+ paystackPayload: {
+  type: Object,
+ },
+ telegramPayload: {
+  type: Object,
+ },
 });
 
 module.exports = {
