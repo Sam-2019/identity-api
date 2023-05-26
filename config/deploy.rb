@@ -46,6 +46,9 @@ desc 'Deploys the current app version to the server.'
 task :deploy do
   deploy do
     comment "Deploying #{fetch(:application_name)} to #{fetch(:domain)}:#{fetch(:deploy_to)}}"
+    invoke :"git:clone"
+    invoke :"yarn:install"
+    invoke :"deploy:cleanup"
 
     on :launch do
       invoke :remote_environment
