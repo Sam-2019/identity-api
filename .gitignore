@@ -5,3 +5,4 @@ test
 config/environment.rb
 .sample_env
 config/.sample_environment.rb
+repl
