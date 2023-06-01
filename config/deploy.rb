@@ -74,3 +74,7 @@ task :start_app do
   command %(pm2 start index.js --name identity-api)
 end
 
+desc 'start console'
+task console: :remote_environment do
+  command %(node console.js)
+end
