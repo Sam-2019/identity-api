@@ -25,7 +25,7 @@ const getID = async (req, res) => {
  const updated = `0${pn.number.significant}`;
 
  const dbData = await getIdentity(updated);
- 
+
  if (dbData) {
   return res.json(dbData);
  }
@@ -43,7 +43,7 @@ const getID = async (req, res) => {
   rfc3966: pn.number.rfc3966 ? pn.number.rfc3966 : null,
   bank: paystack.bank_id ? getTelcoName(paystack.bank_id) : null,
   country: pn?.regionCode ? getCountryName.of(pn.regionCode) : null,
-  carrier: updated ? getTelcoName(updated) : null,
+  carrier: updated ? getTelcoName(paystack.bank_id) : null,
   other_name: truecaller[0].name === null ? null : transformText(truecaller[0].name),
   email: truecaller[0].internetAddresses.length === 0 ? null : truecaller[0].internetAddresses[0].id,
   image: truecaller[0].image === undefined ? randomImage : truecaller[0].image,
