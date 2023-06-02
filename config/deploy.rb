@@ -109,7 +109,7 @@ end
 
 desc 'ngnix config'
 task edit_config: :remote_environment do
-  command %(sudo nano /etc/nginx/sites-available/default)
+  command "#{ENV['nginx']}"
 end
 
 desc 'switch sms processor'
