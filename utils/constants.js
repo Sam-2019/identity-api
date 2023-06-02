@@ -34,11 +34,11 @@ const getTelcoCode = (data) => {
 };
 
 const getTelcoName = (data) => {
- if (telco.mtn.prefix.includes(data)) {
+ if (data === telco.mtn.id) {
   return telco.mtn.alias;
  }
 
- if (telco.vodafone.prefix.includes(data)) {
+ if (data === telco.vodafone.id) {
   return telco.vodafone.alias;
  }
 
