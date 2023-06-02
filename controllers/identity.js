@@ -25,6 +25,7 @@ const getID = async (req, res) => {
  const updated = `0${pn.number.significant}`;
 
  const dbData = await getIdentity(updated);
+ 
  if (dbData) {
   return res.json(dbData);
  }
