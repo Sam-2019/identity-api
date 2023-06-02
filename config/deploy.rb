@@ -69,12 +69,68 @@ end
 
 desc 'start app'
 task :start_app do
-  command %(pm2 flush)
-  command %(pm2 delete 0)
-  command %(pm2 start index.js --name identity-api)
+  in_path(fetch(:current_path)) do
+    command %(pm2 flush)
+    command %(pm2 delete 0)
+    command %(pm2 start index.js --time --name identity-api)
+    command %(pm2 save)
+  end
 end
 
 desc 'start console'
 task console: :remote_environment do
-  command %(node console.js)
+  in_path(fetch(:current_path)) do
+    command %(node console.js)
+  end
+end
+
+desc 'restart app'
+task :restart do
+  in_path(fetch(:current_path)) do
+    command %(pm2 restart index.js --time)
+  end
+end
+
+desc 'shutdown app'
+task :shutdown do
+  in_path(fetch(:current_path)) do
+    command %(pm2 stop index.js)
+  end
+end
+
+desc 'redis console'
+task redis: :remote_environment do
+  command 'redis-cli'
+end
+
+desc 'switch sms processor'
+task switch_sms_processor: :remote_environment do; end
+
+desc 'db backup'
+task backup: :remote_environment do; end
+
+desc 'show logs'
+task logs: :remote_environment do
+  command %(pm2 logs --line 20 --time  0)
+end
+
+desc 'flush logs'
+task flush: :remote_environment do
+  command %(pm2 flush 0)
+end
+
+desc 'pm2 cli dashboard'
+task pm2_dashboard: :remote_environment do
+  command %(pm2 monit)
+end
+
+task memory_usage: :remote_environment do
+  in_path(fetch(:current_path)) do
+    command %(ps aux | head -1; ps aux | sort -rnk 4 | head -10)
+  end
+end
+
+desc 'ngnix config'
+task edit_config: :remote_environment do
+  command %(sudo nano /etc/nginx/sites-available/default)
 end
