@@ -1,17 +1,12 @@
-import { getAll, getIdentity } from "./repository/index.js";
+import { getAll, getIdentity } from "../../db/repository/index.js";
 
 class Identity {
- //  await Identity.connect()
- static connect() {
-  return connectDB();
- }
-
- //  await Identity.text()
+ //  Identity.text()
  static text() {
   return "test";
  }
 
- //  await User.get_user()
+ //  await User.get_user("xxxx")
  get_user(data) {
   return getIdentity(data);
  }
