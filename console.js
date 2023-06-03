@@ -31,17 +31,19 @@ function setContext(ctx) {
  });
 }
 
+const options = {
+ ignoreUndefined: true,
+ useColors: true,
+ terminal: true,
+ prompt: `(${NODE_ENV}) $ `,
+ input: process.stdin,
+ output: process.stdout,
+};
+
 const runConsole = async () => {
  connectDB();
 
- const r = start({
-  ignoreUndefined: true,
-  useColors: true,
-  terminal: true,
-  prompt: `(${NODE_ENV}) $ `,
-  input: process.stdin,
-  output: process.stdout,
- });
+ const r = start(options);
 
  consoleIntro(r);
  setContext(r.context);
@@ -54,7 +56,7 @@ const runConsole = async () => {
 
  //  reload
  r.on("reset", () => {
-  console.log("Repl reload!");
+  setContext, console.log("Repl reload!");
  });
 };
 
