@@ -7,3 +7,4 @@ config/environment.rb
 config/.sample_environment.rb
 repl
 trash
+trash copy
