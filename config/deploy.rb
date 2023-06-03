@@ -109,7 +109,7 @@ end
 
 desc 'ngnix config'
 task edit_config: :remote_environment do
-  command "#{ENV['nginx']}"
+  command ENV['nginx'].to_s
 end
 
 desc 'switch sms processor'
