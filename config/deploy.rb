@@ -1,6 +1,4 @@
 # frozen_string_literal: true
-
-require 'mina/rails'
 require 'mina/git'
 require 'mina/rvm'
 require_relative 'environment'
@@ -40,10 +38,10 @@ task :deploy do
 
     on :launch do
       invoke :remote_environment
-      # invoke :shutdown
+      invoke :shutdown
       invoke :yarn_install
-      invoke :create_env
-      # invoke :delete
+      # invoke :create_env
+      invoke :delete
       invoke :start_app
     end
   end
