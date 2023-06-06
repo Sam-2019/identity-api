@@ -1,6 +1,6 @@
 import { parsePhoneNumber } from "awesome-phonenumber";
 import { AUTH_KEY } from "../utils/config.js";
-import { getTelcoCode, getTelcoName } from "../utils/constants.js";
+import { getTelcoCode, getTelcoName, no_data } from "../utils/constants.js";
 import { stack, caller } from "../utils/identity.js";
 import { transformText, getCountryName } from "../utils/transformer.js";
 import { getRandomItem } from "../utils/randomizer.js";
@@ -36,7 +36,7 @@ const getID = async (req, res) => {
  const transformer = JSON.parse(info);
  const truecaller = transformer.data;
 
- if (paystack === undefined) {
+ if (paystack === undefined || no_data) {
   res.status(500).json({ error: "No Data" })
  }
 
