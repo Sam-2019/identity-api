@@ -37,7 +37,7 @@ const getID = async (req, res) => {
  const truecaller = transformer.data;
 
  if (paystack === undefined || no_data) {
-  res.status(500).json({ error: "No Data" })
+  return res.json({ message: "No Data" })
  }
 
  const output = {
