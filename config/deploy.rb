@@ -40,7 +40,10 @@ task :deploy do
 
     on :launch do
       invoke :remote_environment
+      # invoke :shutdown
       invoke :yarn_install
+      invoke :create_env
+      # invoke :delete
       invoke :start_app
     end
   end
@@ -56,12 +59,18 @@ task :yarn_install do
   command %(yarn install)
 end
 
+desc 'environment file'
+task :create_env do
+  in_path(fetch(:current_path)) do
+    command %(touch .env)
+    command %(nano .env)
+  end
+end
+
 desc 'start app'
 task :start_app do
   in_path(fetch(:current_path)) do
-    command %(pm2 flush)
-    command %(pm2 delete 0)
-    command %(pm2 start index.js --time --name identity-api)
+    command %(pm2 start index.js --time --name #{ENV['app'].to_s})
     command %(pm2 save)
   end
 end
@@ -76,15 +85,22 @@ end
 desc 'restart app'
 task :restart do
   in_path(fetch(:current_path)) do
-    command %(pm2 restart index.js --time)
+    command %(pm2 restart index.js --time --name #{ENV['app'].to_s})
   end
 end
 
 desc 'shutdown app'
 task :shutdown do
   in_path(fetch(:current_path)) do
-    command %(pm2 stop index.js)
+    command %(pm2 stop 0)
+    # command %(pm2 stop --name #{ENV['app'].to_s})
   end
+end
+
+desc 'delete app'
+task :delete do
+    command %(pm2 delete 0)
+    # command %(pm2 delete --name #{ENV['app'].to_s})
 end
 
 desc 'show logs'
@@ -110,6 +126,10 @@ end
 desc 'ngnix config'
 task edit_config: :remote_environment do
   command ENV['nginx'].to_s
+end
+
+task :restart_nginx do
+  queue 'sudo systemctl restart nginx'
 end
 
 desc 'switch sms processor'
