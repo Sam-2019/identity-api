@@ -41,7 +41,6 @@ task :deploy do
       invoke :remote_environment
       invoke :shutdown
       invoke :yarn_install
-      # invoke :create_env
       invoke :delete
       invoke :start_app
     end
@@ -69,7 +68,8 @@ end
 desc 'start app'
 task :start_app do
   in_path(fetch(:current_path)) do
-    command %(pm2 start index.js --time --name #{ENV['app'].to_s})
+    invoke :create_env
+    command %(pm2 start index.js --time --name #{ENV['app']})
     command %(pm2 save)
   end
 end
@@ -84,7 +84,7 @@ end
 desc 'restart app'
 task :restart do
   in_path(fetch(:current_path)) do
-    command %(pm2 restart index.js --time --name #{ENV['app'].to_s})
+    command %(pm2 restart index.js --time --name #{ENV['app']})
   end
 end
 
@@ -92,14 +92,14 @@ desc 'shutdown app'
 task :shutdown do
   in_path(fetch(:current_path)) do
     command %(pm2 stop 0)
-    # command %(pm2 stop --name #{ENV['app'].to_s})
+    # command %(pm2 stop --name #{ENV['app']})
   end
 end
 
 desc 'delete app'
 task :delete do
-    command %(pm2 delete 0)
-    # command %(pm2 delete --name #{ENV['app'].to_s})
+  command %(pm2 delete 0)
+  # command %(pm2 delete --name #{ENV['app']})
 end
 
 desc 'show logs'
