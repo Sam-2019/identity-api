@@ -8,12 +8,12 @@ const client = new TwitterApi({
 });
 
 const sendTweet = async () => {
- //  try {
- //   await client.v2.tweet("auto tweet");
- //   console.log("post successful");
- //  } catch (e) {
- //   console.log('error');
- //  }
+  try {
+   await client.v2.tweet("grateful");
+   console.log("post successful");
+  } catch (e) {
+   console.log('error');
+  }
 };
 
 export { sendTweet };
