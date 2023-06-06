@@ -3,7 +3,7 @@ const telco = {
   id: 28,
   bankcode: "MTN",
   alias: "MTN",
-  prefix: ["024", "054", "055", "059", "025"],
+  prefix: ["024", "053", "054", "055", "059", "025"],
  },
  vodafone: {
   id: 66,
