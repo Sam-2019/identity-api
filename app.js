@@ -6,13 +6,14 @@ import { task } from "./services/cron.js";
 import { redisClient } from "./services/redis.js";
 
 const app = express();
+app.use(cors({ origin: true, credentials: true }));
+app.use(json());
+
 connectDB();
 await redisClient.connect();
 
 task.start();
 
-app.use(cors({ origin: true, credentials: true }));
-app.use(json());
 
 app.use("/api", router);
 
