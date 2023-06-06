@@ -45,4 +45,6 @@ const getTelcoName = (data) => {
  return telco.airteltigo.alias;
 };
 
-export { getTelcoCode, getTelcoName };
+const no_data = "Could not resolve account name. Check parameters or try again";
+
+export { getTelcoCode, getTelcoName, no_data };
