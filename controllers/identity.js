@@ -36,6 +36,10 @@ const getID = async (req, res) => {
  const transformer = JSON.parse(info);
  const truecaller = transformer.data;
 
+ if (paystack === undefined) {
+  res.status(500).json({ error: "No Data" })
+ }
+
  const output = {
   name: paystack.account_name ? paystack.account_name : null,
   account_number: paystack.account_number ? paystack.account_number : null,
