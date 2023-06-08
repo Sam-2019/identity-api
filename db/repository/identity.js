@@ -1,4 +1,4 @@
-import Model from "../model/identity";
+import Model from "../model/identity.js";
 
 const getAll = async () => {
  return await Model.find({});
