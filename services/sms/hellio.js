@@ -1,18 +1,36 @@
+import sha1 from "sha1";
+import axios from "axios";
+import moment from "moment";
+import {
+ HELLIO_CLIENT_ID,
+ HELLIO_SENDER_ID,
+ HELLIO_APP_SECRET,
+} from "../../utils/config.js";
 
-var request = require("request");
+//Format date to support hasing
+const utcMoment = moment.utc();
+const currentDateTime = utcMoment.format("YYYYMMDDHH");
 
-var options = { method: 'POST',
-  url: 'https://api.helliomessaging.com/v1/sms',
-  qs:
-   {
-     senderId: 'HellioSMS',
-     msisdn: '233265515154',
-     message: 'Nodejs Sending SMS',
-     username: 'Your-Hellio-Username',
-     password: 'Your-Hellio-Password' } };
+const hashedAuthKey = sha1(
+ HELLIO_CLIENT_ID + HELLIO_APP_SECRET + currentDateTime
+);
 
-request(options, function (error, response, body) {
-  if (error) throw new Error(error);
+async function smsHellio({ from = HELLIO_SENDER_ID, to, message }) {
+ try {
+  const { data } = await axios.post("https://api.helliomessaging.com/v2/sms", {
+   senderId: from,
+   msisdn: to,
+   message: message,
+   authKey: hashedAuthKey,
+   clientId: HELLIO_CLIENT_ID,
+  });
 
-  console.log(body);
-});
+  console.log(data);
+ } catch (error) {
+  console.error(error.data);
+ }
+}
+
+export { smsHellio };
+
+// smsHellio("to", "message");
