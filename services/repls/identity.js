@@ -1,4 +1,4 @@
-import { getAll, getIdentity } from "../../db/repository/index.js";
+import { getAll, getIdentity } from "../../db/repository/identity.js";
 
 class Identity {
  //  Identity.text()

@@ -4,7 +4,7 @@ import { getTelcoCode, getTelcoName, no_data } from "../utils/constants.js";
 import { stack, caller } from "../utils/identity.js";
 import { transformText, getCountryName } from "../utils/transformer.js";
 import { getRandomItem } from "../utils/randomizer.js";
-import { addIdentity, getIdentity } from "../db/repository/index.js";
+import { addIdentity, getIdentity } from "../db/repository/identity.js";
 
 const getID = async (req, res) => {
  const randomImage = getRandomItem();
