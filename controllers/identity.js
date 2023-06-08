@@ -25,8 +25,8 @@ const getID = async (req, res) => {
  const updated = `0${pn.number.significant}`;
 
  const dbData = await getIdentity(updated);
-
  if (dbData) {
+  await logView(number);
   return res.json(dbData);
  }
 
@@ -37,7 +37,7 @@ const getID = async (req, res) => {
  const truecaller = transformer.data;
 
  if (paystack === undefined || no_data) {
-  return res.json({ message: "No Data" })
+  return res.json({ message: "No Data" });
  }
 
  const output = {
@@ -49,13 +49,13 @@ const getID = async (req, res) => {
   country: pn?.regionCode ? getCountryName.of(pn.regionCode) : null,
   carrier: updated ? getTelcoName(paystack.bank_id) : null,
   other_name: truecaller[0].name === null ? null : transformText(truecaller[0].name),
-  email: truecaller[0].internetAddresses.length === 0 ? null : truecaller[0].internetAddresses[0].id,
+  email: truecaller[0].internetAddresses.length === 0  ? null  : truecaller[0].internetAddresses[0].id,
   image: truecaller[0].image === undefined ? randomImage : truecaller[0].image,
   gender: truecaller[0].gender === null ? null : truecaller[0].gender,
   score: truecaller[0].score === null ? null : truecaller[0].score,
-  e164Format: truecaller[0].phones.length === 0 ? null : truecaller[0].phones[0].e164Format,
-  numberType: truecaller[0].phones.length === 0 ? null : truecaller[0].phones[0].numberType,
-  countryCode: truecaller[0].phones.length === 0 ? null : truecaller[0].phones[0].countryCode,
+  e164Format: truecaller[0].phones.length === 0  ? null  : truecaller[0].phones[0].e164Format,
+  numberType: truecaller[0].phones.length === 0  ? null  : truecaller[0].phones[0].numberType,
+  countryCode: truecaller[0].phones.length === 0  ? null  : truecaller[0].phones[0].countryCode,
   paystackPayload: paystack,
   telegramPayload: truecaller[0],
  };
