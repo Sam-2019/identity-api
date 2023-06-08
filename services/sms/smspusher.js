@@ -1,19 +1,23 @@
-var request = require("request");
+import axios from "axios";
+import {
+ MSMPUSHER_SENDER_ID,
+ MSMPUSHER_PUBLICKEY,
+ MSMPUSHER_PRIVATEKEY,
+} from "../../utils/config.js";
 
-var options = {
- method: "POST",
- url: "https://api.msmpusher.net/v1/send",
- qs: {
-  privatekey: "<PRIVATEKEY>",
-  publickey: "<PUBLICKEY>",
-  sender: "MSMPUSHER",
-  numbers: "7700900000",
-  message: "test_sms",
- },
-};
+async function smsPusher({ from = MSMPUSHER_SENDER_ID, to, message }) {
+ try {
+  const response = await axios.post("https://api.msmpusher.net/v1/send", {
+   privatekey: MSMPUSHER_PRIVATEKEY,
+   publickey: MSMPUSHER_PUBLICKEY,
+   sender: from,
+   numbers: to,
+   message,
+  });
 
-request(options, function (error, response, body) {
- if (error) throw new Error(error);
-
- console.log(body);
-});
+  console.log(response);
+ } catch (e) {
+  console.log(e);
+ }
+}
+export { smsPusher };
