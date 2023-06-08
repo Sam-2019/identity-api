@@ -4,6 +4,15 @@ import { NODE_ENV } from "./utils/config.js";
 import { connectDB } from "./db/index.js";
 import { replServices } from "./services/repls/index.js";
 
+const options = {
+ ignoreUndefined: true,
+ useColors: true,
+ terminal: true,
+ prompt: `(${NODE_ENV}) $ `,
+ input: process.stdin,
+ output: process.stdout,
+};
+
 function consoleIntro(r) {
  console.log("------------------------------------");
  r.displayPrompt();
@@ -31,16 +40,7 @@ function setContext(ctx) {
  });
 }
 
-const options = {
- ignoreUndefined: true,
- useColors: true,
- terminal: true,
- prompt: `(${NODE_ENV}) $ `,
- input: process.stdin,
- output: process.stdout,
-};
-
-const runConsole = async () => {
+async function runConsole() {
  connectDB();
 
  const r = start(options);
@@ -58,6 +58,6 @@ const runConsole = async () => {
  r.on("reset", () => {
   setContext, console.log("Repl reload!");
  });
-};
+}
 
 runConsole();
