@@ -1,4 +1,5 @@
 import { start } from "repl";
+import gaze from "gaze";
 import "./loadEnv.js";
 import { NODE_ENV } from "./utils/config.js";
 import { connectDB } from "./db/index.js";
@@ -12,6 +13,18 @@ const options = {
  input: process.stdin,
  output: process.stdout,
 };
+
+function invalidateCache() {
+ console.log("clear cache");
+}
+
+function watchForChanges() {
+ gaze("**/*.js", { mode: "poll" }, (err, watcher) => {
+  watcher.on("all", (event, filepath) => {
+   console.log("Reloading due to change in", filepath);
+  });
+ });
+}
 
 function consoleIntro(r) {
  console.log("------------------------------------");
