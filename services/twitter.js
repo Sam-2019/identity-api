@@ -1,4 +1,5 @@
 import { TwitterApi } from "twitter-api-v2";
+import { addTweet } from "../db/repository/tweet.js";
 
 const client = new TwitterApi({
  appKey: process.env.TWITTER_API_KEY,
@@ -8,12 +9,15 @@ const client = new TwitterApi({
 });
 
 const sendTweet = async () => {
-  try {
-   await client.v2.tweet("grateful");
-   console.log("post successful");
-  } catch (e) {
-   console.log('error');
-  }
+ const tweet = "grateful";
+ try {
+  const response = await client.v2.tweet(tweet);
+  await addTweet(tweet, "success", response);
+  console.log("post successful");
+ } catch (e) {
+  await addTweet(tweet, "failed", e.data);
+  console.log("error");
+ }
 };
 
 export { sendTweet };
