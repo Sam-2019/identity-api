@@ -6,6 +6,8 @@ import {
 } from "../../utils/config.js";
 
 async function smsPusher({ from = MSMPUSHER_SENDER_ID, to, message }) {
+ if (to === "" || message === "") return;
+ 
  try {
   const response = await axios.post("https://api.msmpusher.net/v1/send", {
    privatekey: MSMPUSHER_PRIVATEKEY,

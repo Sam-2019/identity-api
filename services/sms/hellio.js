@@ -16,6 +16,8 @@ const hashedAuthKey = sha1(
 );
 
 async function smsHellio({ from = HELLIO_SENDER_ID, to, message }) {
+ if (to === "" || message === "") return;
+ 
  try {
   const { data } = await axios.post("https://api.helliomessaging.com/v2/sms", {
    senderId: from,

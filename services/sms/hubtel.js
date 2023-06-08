@@ -6,6 +6,8 @@ import {
 } from "../../utils/config.js";
 
 async function smsHubtel({ from = HUBTEL_SENDER_ID, to, message }) {
+ if (to === "" || message === "") return;
+ 
  try {
   const { data } = await axios.get(
    "https://devp-sms03726-api.hubtel.com/v1/messages/send",
@@ -28,4 +30,3 @@ async function smsHubtel({ from = HUBTEL_SENDER_ID, to, message }) {
 export { smsHubtel };
 
 // smsHubtel({ to: "to", message: "message" });
-
