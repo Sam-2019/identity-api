@@ -21,3 +21,5 @@ async function smsPusher({ from = MSMPUSHER_SENDER_ID, to, message }) {
  }
 }
 export { smsPusher };
+
+// smsPusher({ to: "to", message: "message" });
