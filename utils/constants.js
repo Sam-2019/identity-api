@@ -42,9 +42,45 @@ const getTelcoName = (data) => {
   return telco.vodafone.alias;
  }
 
- return telco.airteltigo.alias;
+ if (data === telco.airteltigo.id) {
+  return telco.airteltigo.alias;
+ }
+
+ return null;
 };
 
-const no_data = "Could not resolve account name. Check parameters or try again";
+const getTelcoNameII = (data) => {
+ const slicedPhone = data.slice(0, 3);
 
-export { getTelcoCode, getTelcoName, no_data };
+ if (telco.mtn.prefix.includes(slicedPhone)) {
+  return telco.mtn.alias;
+ }
+
+ if (telco.vodafone.prefix.includes(slicedPhone)) {
+  return telco.vodafone.alias;
+ }
+
+ if (telco.airteltigo.prefix.includes(slicedPhone)) {
+  return telco.airteltigo.alias;
+ }
+
+ return null;
+};
+
+const notFound = "ID not found";
+const defaultMessage = "Konnichiwa";
+const tooManyRequests = "Request failed with status code 429";
+const invalidNumber = "Invalid mobile number. Please check and ty again!";
+const stackNotFound =
+ "Could not resolve account name. Check parameters or try again.";
+
+export {
+ notFound,
+ getTelcoCode,
+ getTelcoName,
+ getTelcoNameII,
+ stackNotFound,
+ invalidNumber,
+ defaultMessage,
+ tooManyRequests,
+};
