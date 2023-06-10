@@ -1,15 +1,14 @@
 import { redisClient } from "../redis.js";
 
 class RedisService {
- //  Redis.write("key", "xxxxx")
+ // await redis.write("key", "xxxxx")
  async write(key, value) {
-  await redisClient.set(key, value);
+  return await redisClient.set(key, value);
  }
 
- //  Redis.read("key")
+ // await redis.read("key")
  async read(key) {
-  const value = await redisClient.get(key);
-  return console.log(value);
+  return await redisClient.get(key);
  }
 }
 
