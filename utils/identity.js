@@ -1,45 +1,60 @@
 import Paystack from "paystack-api";
-import { searchNumber } from "truecallerjs";
+import truecallerjs from "truecallerjs";
 import { TRUECALLER } from "../utils/config.js";
+import { tooManyRequests } from "./constants.js";
 
 const paystack = Paystack(process.env.NIMBLE);
-async function stack(phone, accountCode, res) {
+async function stack(phone, accountCode) {
  try {
   const paystackData = await paystack.verification.resolveAccount({
    account_number: phone,
    bank_code: accountCode,
   });
 
-  return paystackData.data;
+  return {
+   message: null,
+   data: paystackData.data,
+  };
  } catch (error) {
-  // res.status(500).json({ message: error.message });
+  return { data: null, message: error.error.message };
  }
 }
 
-async function caller(pn, res) {
+async function caller(internationalNumber, regionCode) {
  try {
-  var truecallerData = await searchNumber({
-   number: pn.number.e164,
-   countryCode: pn.regionCode,
+  const { responseStatus, errorResp, data } = await truecallerjs.searchNumber({
+   number: internationalNumber,
+   countryCode: regionCode,
    installationId: TRUECALLER,
    output: "JSON",
   });
 
-  const info = JSON.stringify(truecallerData, null, 2);
-  // const transformer = {
-  //   id: info.data[0].id,
-  //   name: info.data[0].name,
-  //   image: info.data[0].image,
-  //   gender: info.data[0].gender,
-  //   internetAddresses: {
-  //     email: info.data[0].internetAddresses[0].id,
-  //     caption: info.data[0].internetAddresses[0].caption,
-  //   },
-  // };
+  if (errorResp === tooManyRequests) {
+   return {
+    data: null,
+    message: tooManyRequests,
+   };
+  }
 
-  return info;
+  if (responseStatus === "error") {
+   return {
+    data: null,
+    message: "error",
+   };
+  }
+
+  const info = JSON.stringify(data, null, 2);
+  const transformer = JSON.parse(info);
+
+  return {
+   message: null,
+   data: transformer[0],
+  };
  } catch (error) {
-  // res.status(500).json({ message: error.message });
+  return {
+   data: null,
+   message: error,
+  };
  }
 }
 
