@@ -1,7 +1,7 @@
 import Identity from "./identity.js";
 import RedisService from "./redis.js";
 import SmsProcessor from "./sms.js";
-import Tweet from './tweet.js'
+import Tweet from "./tweet.js";
 
 const replServices = [
  { key: "text", value: Identity.text() },
