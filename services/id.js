@@ -5,8 +5,13 @@ import {
  getTelcoNameII,
  invalidNumber,
  notFound,
+ responseType,
 } from "../utils/constants.js";
-import { getIdentity, logView } from "../db/repository/identity.js";
+import {
+ addIdentity,
+ getIdentity,
+ logView,
+} from "../db/repository/identity.js";
 import { transformText, getCountryName } from "../utils/transformer.js";
 import { caller, stack } from "../utils/identity.js";
 import { getRandomItem } from "../utils/randomizer.js";
@@ -49,24 +54,24 @@ const checkDB = async (data) => {
 
 const webLookup = async (data, res) => {
  const { transformedNumber, message } = validatePhoneNumber(data);
+
+ if (message === invalidNumber) {
+  return responseType(400, true, invalidNumber, res);
+ }
+
  const nationalNumber = transformedNumber.number.national.replace(/\s+/g, "");
  const rfc3966 = transformedNumber.number.rfc3966;
  const internationalNumber = transformedNumber.number.e164;
  const regionCode = transformedNumber.regionCode;
-
- if (message === invalidNumber) {
-  return res.status(400).json({ message: invalidNumber });
- }
-
  const dbData = await checkDB(nationalNumber);
 
  if (dbData.data) {
-  return res.status(200).json(dbData.data);
+  return responseType(200, false, dbData.data, res);
  }
 
  const accountCode = getTelcoCode(nationalNumber);
-  const paystack = await stack(nationalNumber, accountCode);
-  const truecaller = await caller(internationalNumber, regionCode);
+ const paystack = await stack(nationalNumber, accountCode);
+ const truecaller = await caller(internationalNumber, regionCode);
 
  const info = {
   nationalNumber,
@@ -76,10 +81,10 @@ const webLookup = async (data, res) => {
  };
 
  if (paystack.message && truecaller.message) {
-  return res.status(200).json({ message: notFound });
+  return responseType(200, true, notFound, res);
  }
 
- return res.status(200).json(external(paystack, truecaller, info));
+ return responseType(200, false, external(paystack, truecaller, info), res);
 };
 
 const external = (paystack, truecaller, info) => {
@@ -107,7 +112,7 @@ const payload = (paystack, truecaller, info) => {
  const email = truecaller?.internetAddresses ? truecaller?.internetAddresses[0]?.id : null;
  const numberType = truecaller?.phones ? truecaller?.phones[0]?.numberType : null;
 
- return {
+ const result = {
   name,
   account_number: paystack?.account_number,
   bank,
@@ -126,6 +131,9 @@ const payload = (paystack, truecaller, info) => {
   telegramPayload: truecaller,
   paystackPayload: paystack,
  };
+
+ addIdentity(result);
+ return result;
 };
 
 export { webLookup };
