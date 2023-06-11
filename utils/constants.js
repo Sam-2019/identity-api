@@ -67,6 +67,7 @@ const getTelcoNameII = (data) => {
  return null;
 };
 
+const httpView = true;
 const notFound = "ID not found";
 const defaultMessage = "Konnichiwa";
 const tooManyRequests = "Request failed with status code 429";
@@ -74,13 +75,44 @@ const invalidNumber = "Invalid mobile number. Please check and ty again!";
 const stackNotFound =
  "Could not resolve account name. Check parameters or try again.";
 
+const httpResponse = (code, message, output, res) => {
+ //  console.log(code, message, output, res);
+ if (res && message) {
+  return res.status(code).json({ message: output });
+ }
+
+ if (res) {
+  return res.status(code).json(output);
+ }
+
+ return output;
+};
+
+const consoleResponse = (message, output) => {
+ if (message) {
+  console.log({ message: message, output: output });
+  return;
+ }
+ console.log({ output });
+ return;
+};
+
+const responseType = (code, message, output, res) => {
+ if (httpView) {
+  return httpResponse(code, message, output, res);
+ }
+
+ return consoleResponse(message, output);
+};
+
 export {
  notFound,
  getTelcoCode,
  getTelcoName,
- getTelcoNameII,
+ responseType,
  stackNotFound,
  invalidNumber,
+ getTelcoNameII,
  defaultMessage,
  tooManyRequests,
 };
