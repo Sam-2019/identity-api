@@ -5,7 +5,6 @@ import {
  getTelcoNameII,
  invalidNumber,
  notFound,
- responseType,
 } from "../utils/constants.js";
 import {
  addIdentity,
@@ -15,6 +14,7 @@ import {
 import { transformText, getCountryName } from "../utils/transformer.js";
 import { caller, stack } from "../utils/identity.js";
 import { getRandomItem } from "../utils/randomizer.js";
+import { responseType } from "../utils/responseView.js";
 
 const validatePhoneNumber = (number) => {
  let countryCode = "GH";
@@ -52,11 +52,11 @@ const checkDB = async (data) => {
  };
 };
 
-const webLookup = async (data, res) => {
+const webLookup = async ({ data, res, httpView = true }) => {
  const { transformedNumber, message } = validatePhoneNumber(data);
 
  if (message === invalidNumber) {
-  return responseType(400, true, invalidNumber, res);
+  return responseType(400, true, invalidNumber, res, httpView);
  }
 
  const nationalNumber = transformedNumber.number.national.replace(/\s+/g, "");
@@ -66,12 +66,12 @@ const webLookup = async (data, res) => {
  const dbData = await checkDB(nationalNumber);
 
  if (dbData.data) {
-  return responseType(200, false, dbData.data, res);
+  return responseType(200, false, dbData.data, res, httpView);
  }
 
  const accountCode = getTelcoCode(nationalNumber);
- const paystack = await stack(nationalNumber, accountCode);
- const truecaller = await caller(internationalNumber, regionCode);
+  const paystack = await stack(nationalNumber, accountCode);
+  const truecaller = await caller(internationalNumber, regionCode);
 
  const info = {
   nationalNumber,
@@ -81,10 +81,16 @@ const webLookup = async (data, res) => {
  };
 
  if (paystack.message && truecaller.message) {
-  return responseType(200, true, notFound, res);
+  return responseType(200, true, notFound, res, httpView);
  }
 
- return responseType(200, false, external(paystack, truecaller, info), res);
+ return responseType(
+  200,
+  false,
+  external(paystack, truecaller, info),
+  res,
+  httpView
+ );
 };
 
 const external = (paystack, truecaller, info) => {
@@ -132,8 +138,11 @@ const payload = (paystack, truecaller, info) => {
   paystackPayload: paystack,
  };
 
- addIdentity(result);
+  addIdentity(result);
  return result;
 };
 
 export { webLookup };
+
+
+// await webLookup({ data: req.params.id, res, httpView: true });
