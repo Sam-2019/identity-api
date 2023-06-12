@@ -20,7 +20,7 @@ class SmsProcessor {
  //  await sms_processor.send_sms("0240586043", "hi")
  async send_sms(to, message) {
   if (to === "" || message === "") return;
-  
+
   const processors = ["HELLIO", "SMSPUSHER", "HUBTEL"];
   const processor = await this.redis.read("sms_processor");
   const validateProcessor = processors.includes(processor);
@@ -29,13 +29,13 @@ class SmsProcessor {
   const current_processor = processor ?? "HUBTEL";
   switch (current_processor) {
    case "HELLIO":
-    smsHellio({ to, message });
+    await smsHellio({ to, message });
     break;
    case "SMSPUSHER":
-    smsPusher({ to, message });
+    await smsPusher({ to, message });
     break;
    default:
-    smsHubtel({ to, message });
+    await smsHubtel({ to, message });
   }
  }
 
