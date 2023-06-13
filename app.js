@@ -13,6 +13,6 @@ connectDB();
 await redisClient.connect();
 // task.start();
 
-app.use("/api", router);
+app.use("/", router);
 
 export default app;

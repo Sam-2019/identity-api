@@ -4,6 +4,6 @@ import { getID } from "../controllers/identity.js";
 
 const router = express.Router();
 router.get("/", getHome);
-router.get("/id/:id", getID);
+router.get("/api/id/:id", getID);
 
 export default router
