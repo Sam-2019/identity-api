@@ -49,7 +49,7 @@ class SmsProcessor {
  }
 
  // await sms_processor.switch("xxx")
- async switch(value) {
+ async switch(value = SmsProcessor.default()) {
   return await this.redis.write("sms_processor", value.toUpperCase());
  }
 }
