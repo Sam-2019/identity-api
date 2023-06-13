@@ -37,6 +37,7 @@ task :deploy do
   deploy do
     comment "Deploying #{fetch(:application_name)} to #{fetch(:domain)}:#{fetch(:deploy_to)}}"
     invoke :"git:clone"
+    invoke :"deploy:link_shared_paths"
     invoke :"deploy:cleanup"
 
     on :launch do
@@ -70,7 +71,6 @@ end
 desc 'start app'
 task :start_app do
   in_path(fetch(:current_path)) do
-    invoke :create_env
     command %(pm2 start index.js --time --name #{ENV['app']})
     command %(pm2 save)
   end
@@ -106,7 +106,7 @@ end
 
 desc 'show logs'
 task logs: :remote_environment do
-  command %(pm2 logs --line 20 --time  0)
+  command %(pm2 logs --time  0)
 end
 
 desc 'flush logs'
