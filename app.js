@@ -11,7 +11,7 @@ app.use(json());
 
 connectDB();
 await redisClient.connect();
-task.start();
+// task.start();
 
 app.use("/api", router);
 
