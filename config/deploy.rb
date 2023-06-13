@@ -16,6 +16,8 @@ set :execution_mode, :system
 set :init_system, :systemd
 set :service_unit_path, '/etc/systemd/system'
 
+set :shared_files, fetch(:shared_files, []).push('.env')
+
 # Optional settings:
 set :term_mode, :pretty
 set :user, ENV['user'].to_s
