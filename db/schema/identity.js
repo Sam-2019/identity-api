@@ -8,34 +8,25 @@ const dataSchema = new Schema(
   account_number: {
    type: String,
   },
-  phone: {
-   type: String,
-  },
-  rfc3966: {
-   type: String,
-  },
   bank: {
-   type: String,
-  },
-  country: {
-   type: String,
-  },
-  carrier: {
-   type: String,
-  },
-  other_name: {
    type: String,
   },
   email: {
    type: String,
   },
-  image: {
-   type: String,
-  },
   gender: {
    type: String,
   },
-  score: {
+  image: {
+   type: String,
+  },
+  country: {
+   type: String,
+  },
+  countryCode: {
+   type: String,
+  },
+  rfc3966: {
    type: String,
   },
   e164Format: {
@@ -44,7 +35,10 @@ const dataSchema = new Schema(
   numberType: {
    type: String,
   },
-  countryCode: {
+  carrier: {
+   type: String,
+  },
+  score: {
    type: String,
   },
   impressionCount: {
