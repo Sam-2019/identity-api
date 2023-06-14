@@ -112,7 +112,8 @@ const payload = (paystack, truecaller, info) => {
  const country = getCountryName.of(info?.regionCode);
  const other_name = transformText(truecaller?.name);
  const image = truecaller?.image || getRandomItem();
- const name = paystack?.account_name || truecaller?.name;
+ const name = paystack?.account_name || other_name;
+ const phone = paystack?.account_number ?? info?.nationalNumber;
  const bank = getTelcoName(paystack?.bank_id) || getTelcoNameII(info?.nationalNumber);
  const carrier = getTelcoName(paystack?.bank_id) || getTelcoNameII(info?.nationalNumber);
  const email = truecaller?.internetAddresses ? truecaller?.internetAddresses[0]?.id : null;
@@ -120,16 +121,14 @@ const payload = (paystack, truecaller, info) => {
 
  const result = {
   name,
-  account_number: paystack?.account_number,
+  account_number: phone,
   bank,
-  other_name,
   email,
   gender: truecaller?.gender,
   image,
   country,
   countryCode: info?.regionCode,
   rfc3966: info?.rfc3966,
-  phone: info?.nationalNumber,
   e164Format: info?.internationalNumber,
   numberType,
   carrier,
