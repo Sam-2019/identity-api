@@ -8,6 +8,9 @@ const dataSchema = new Schema(
   status: {
    type: String,
   },
+  retweeted: {
+    type: Boolean,
+   },
   payload: {
    type: Object,
   },
