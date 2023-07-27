@@ -1,10 +1,10 @@
 import cron from "node-cron";
-import { sendTweet } from "./twitter.js";
+import { tweet } from "./twitter.js";
 
 var task = cron.schedule(
  "30 9 * * *",
  function () {
-  sendTweet();
+  tweet();
  },
  {
   scheduled: true,
