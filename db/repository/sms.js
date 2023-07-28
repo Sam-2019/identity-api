@@ -1,4 +1,4 @@
-import Model from "../model/sms";
+import Model from "../model/sms.js";
 
 const getAll = async () => {
  return await Model.find({});
