@@ -6,10 +6,8 @@ import {
 } from "../../utils/config.js";
 import { addReceipt } from "../../db/repository/sms.js";
 
-async function smsHubtel({ from = HUBTEL_SENDER_ID, to, message }) {
+async function smsHubtel({ from = HUBTEL_SENDER_ID, to, message, provider }) {
  if (to === "" || message === "") return;
-
- const provider = "hubtel";
 
  try {
   const { data } = await axios.get("https://smsc.hubtel.com/v1/messages/send", {

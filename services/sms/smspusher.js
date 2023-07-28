@@ -6,10 +6,8 @@ import {
 } from "../../utils/config.js";
 import { addReceipt } from "../../db/repository/sms.js";
 
-async function smsPusher({ from = MSMPUSHER_SENDER_ID, to, message }) {
+async function smsPusher({ from = MSMPUSHER_SENDER_ID, to, message, provider }) {
  if (to === "" || message === "") return;
-
- const provider = "sms_pusher";
 
  try {
   const response = await axios.post("https://api.msmpusher.net/v1/send", {
