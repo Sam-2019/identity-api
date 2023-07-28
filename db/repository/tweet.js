@@ -7,6 +7,7 @@ const getAll = async () => {
 const getNonRetweet = async () => {
  return await Model.findOne({
   retweeted: false,
+  status: "success",
  });
 };
 
@@ -28,4 +29,17 @@ const updateTweet = async (retweeted, id) => {
  return await Model.findOneAndUpdate(query, { $set: { retweeted: retweeted } });
 };
 
-export { getAll, getNonRetweet, getTweet, addTweet, updateTweet };
+const write = async () => {
+ await Model.bulkWrite([
+  {
+   updateMany: {
+    filter: { status: "success" },
+    update: { retweeted: false },
+   },
+  },
+ ]).then((res) => {
+  console.log(res.insertedCount, res.modifiedCount, res.deletedCount);
+ });
+};
+
+export { getAll, getNonRetweet, getTweet, addTweet, updateTweet, write };
