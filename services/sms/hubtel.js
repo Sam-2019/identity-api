@@ -10,14 +10,14 @@ async function smsHubtel({ from = HUBTEL_SENDER_ID, to, message }) {
 
  try {
   const { data } = await axios.get(
-   "https://devp-sms03726-api.hubtel.com/v1/messages/send",
+   "https://smsc.hubtel.com/v1/messages/send",
    {
     params: {
-     From: from,
-     To: to,
-     Content: message,
-     ClientId: HUBTEL_CLIENT_ID,
-     ClientSecret: HUBTEL_CLIENT_SECRET,
+     from: from,
+     to: to,
+     content: message,
+     clientId: HUBTEL_CLIENT_ID,
+     clientSecret: HUBTEL_CLIENT_SECRET,
     },
    }
   );
