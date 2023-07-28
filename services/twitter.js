@@ -1,8 +1,8 @@
 import { TwitterApi } from "twitter-api-v2";
 import {
  addTweet,
- getNonRetweet,
  updateTweet,
+ getNonRetweet,
 } from "../db/repository/tweet.js";
 
 const client = new TwitterApi({
@@ -18,32 +18,31 @@ const sendTweet = async () => {
  try {
   const response = await client.v2.tweet(tweet);
   await addTweet(tweet, "success", false, response);
-  console.log("post successful");
+  //   console.log("post successful");
  } catch (e) {
   await addTweet(tweet, "failed", false, e.data);
-  console.log("error");
+  //   console.log("error");
  }
 };
 
-const retweet = async (tweetID) => {
- // loggedUserId: string: Logged user (you) ID
- const loggedUserId = "12";
+const retweet = async (result) => {
+ const { data } = await client.v2.me();
+ const tweetID = result.payload.data.id;
+ const entryID = result.id;
  try {
-  await client.v2.retweet(loggedUserId, tweetID);
-  await updateTweet(true, data.id);
-  console.log("retweet successful");
+  await client.v2.retweet(data.id, tweetID);
+  await updateTweet(true, entryID);
+  //   console.log("retweet successful");
  } catch (e) {
-  await updateTweet(false, data.id);
-  console.log("retweet failed");
+  await updateTweet(false, entryID);
+  //   console.log("retweet failed");
  }
 };
 
 const tweet = async () => {
- const data = await getNonRetweet();
-
- if (data) {
-  const tweetID = data.payload.edit_history_tweet_ids.id;
-  return retweet(tweetID);
+ const result = await getNonRetweet();
+ if (result) {
+  return retweet(result);
  }
 
  sendTweet();
