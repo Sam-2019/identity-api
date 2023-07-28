@@ -6,6 +6,7 @@ import {
  HELLIO_SENDER_ID,
  HELLIO_APP_SECRET,
 } from "../../utils/config.js";
+import { addReceipt } from "../../db/repository/sms.js";
 
 //Format date to support hasing
 const utcMoment = moment.utc();
@@ -17,6 +18,8 @@ const hashedAuthKey = sha1(
 
 async function smsHellio({ from = HELLIO_SENDER_ID, to, message }) {
  if (to === "" || message === "") return;
+
+ const provider = "hellio";
  
  try {
   const { data } = await axios.post("https://api.helliomessaging.com/v2/sms", {
@@ -27,9 +30,9 @@ async function smsHellio({ from = HELLIO_SENDER_ID, to, message }) {
    clientId: HELLIO_CLIENT_ID,
   });
 
-  console.log(data);
+  addReceipt(to, message, from, provider, data);
  } catch (error) {
-  console.error(error.data);
+  addReceipt(to, message, from, provider, error.data);
  }
 }
 

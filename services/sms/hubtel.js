@@ -4,26 +4,26 @@ import {
  HUBTEL_SENDER_ID,
  HUBTEL_CLIENT_SECRET,
 } from "../../utils/config.js";
+import { addReceipt } from "../../db/repository/sms.js";
 
 async function smsHubtel({ from = HUBTEL_SENDER_ID, to, message }) {
  if (to === "" || message === "") return;
 
+ const provider = "hubtel";
+
  try {
-  const { data } = await axios.get(
-   "https://smsc.hubtel.com/v1/messages/send",
-   {
-    params: {
-     from: from,
-     to: to,
-     content: message,
-     clientId: HUBTEL_CLIENT_ID,
-     clientSecret: HUBTEL_CLIENT_SECRET,
-    },
-   }
-  );
-  console.log(data);
+  const { data } = await axios.get("https://smsc.hubtel.com/v1/messages/send", {
+   params: {
+    from: from,
+    to: to,
+    content: message,
+    clientId: HUBTEL_CLIENT_ID,
+    clientSecret: HUBTEL_CLIENT_SECRET,
+   },
+  });
+  addReceipt(to, message, from, provider, data);
  } catch (error) {
-  console.error(error.response.data);
+  addReceipt(to, message, from, provider, error.response.data);
  }
 }
 

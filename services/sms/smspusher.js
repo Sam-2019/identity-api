@@ -4,10 +4,13 @@ import {
  MSMPUSHER_PUBLICKEY,
  MSMPUSHER_PRIVATEKEY,
 } from "../../utils/config.js";
+import { addReceipt } from "../../db/repository/sms.js";
 
 async function smsPusher({ from = MSMPUSHER_SENDER_ID, to, message }) {
  if (to === "" || message === "") return;
- 
+
+ const provider = "sms_pusher";
+
  try {
   const response = await axios.post("https://api.msmpusher.net/v1/send", {
    privatekey: MSMPUSHER_PRIVATEKEY,
@@ -17,9 +20,9 @@ async function smsPusher({ from = MSMPUSHER_SENDER_ID, to, message }) {
    message,
   });
 
-  console.log(response);
+  addReceipt(to, message, from, provider, response);
  } catch (e) {
-  console.log(e);
+  addReceipt(to, message, from, provider, e);
  }
 }
 export { smsPusher };
