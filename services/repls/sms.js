@@ -21,27 +21,27 @@ class SmsProcessor {
  async send_sms(to, message) {
   if (to === "" || message === "") return;
 
-  const processors = ["HELLIO", "SMSPUSHER", "HUBTEL"];
+  const processors = ["HELLIO", "SMSPUSHER", "HUBTEL", null];
   const processor = await this.redis.read("sms_processor");
   const validateProcessor = processors.includes(processor);
   if (validateProcessor === false) return;
 
-  const current_processor = processor ?? "HUBTEL";
+  const current_processor = processor ?? await SmsProcessor.switch()
   switch (current_processor) {
    case "HELLIO":
-    await smsHellio({ to, message });
+    await smsHellio({ to, message, provider: processors[0] });
     break;
    case "SMSPUSHER":
-    await smsPusher({ to, message });
+    await smsPusher({ to, message, provider: processors[1] });
     break;
    default:
-    await smsHubtel({ to, message });
+    await smsHubtel({ to, message, provider: processors[2] });
   }
  }
 
  //  await sms_processor.current_processor()
  async current_processor() {
-  if ((await this.redis.read("sms_processor")) === undefined) {
+  if ((await this.redis.read("sms_processor")) === undefined || null) {
    return await this.redis.write("sms_processor", SmsProcessor.default());
   }
 
