@@ -1,4 +1,9 @@
-import { getAll, getTweet } from "../../db/repository/tweet.js";
+import {
+ write,
+ getAll,
+ getTweet,
+ getNonRetweet,
+} from "../../db/repository/tweet.js";
 
 class Tweet {
  //  await tweet.get_tweet("xxxx")
@@ -11,6 +16,18 @@ class Tweet {
  //  await Tweet.get_tweets()
  get_tweets() {
   return getAll();
+ }
+
+ //  await tweet.get_non_retweet()
+ //  await Tweet.get_non_retweet()
+ get_non_retweet() {
+  return getNonRetweet();
+ }
+
+ //  await tweet.migration()
+ //  await Tweet.migration()
+ migration() {
+  return write();
  }
 }
 
