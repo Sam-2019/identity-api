@@ -25,8 +25,7 @@ const addTweet = async (tweet, status, retweeted, payload) => {
 };
 
 const updateTweet = async (retweeted, id) => {
- const query = { id: id };
- return await Model.findOneAndUpdate(query, { $set: { retweeted: retweeted } });
+ await Model.findByIdAndUpdate(id, { retweeted: retweeted });
 };
 
 const write = async () => {
