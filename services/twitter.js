@@ -32,10 +32,10 @@ const retweet = async (result) => {
  try {
   await client.v2.retweet(data.id, tweetID);
   await updateTweet(true, entryID);
-  //   console.log("retweet successful");
+    // console.log("retweet successful");
  } catch (e) {
   await updateTweet(false, entryID);
-  //   console.log("retweet failed");
+    console.log("retweet failed");
  }
 };
 
