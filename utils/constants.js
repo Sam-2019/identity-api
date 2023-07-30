@@ -67,6 +67,8 @@ const getTelcoNameII = (data) => {
  return null;
 };
 
+const success = "success";
+const failed = "failed";
 const notFound = "ID not found";
 const defaultMessage = "Konnichiwa";
 const tooManyRequests = "Request failed with status code 429";
@@ -75,6 +77,8 @@ const stackNotFound =
  "Could not resolve account name. Check parameters or try again.";
 
 export {
+ success,
+ failed,
  notFound,
  getTelcoCode,
  getTelcoName,

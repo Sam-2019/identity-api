@@ -9,8 +9,9 @@ const dataSchema = new Schema(
    type: String,
   },
   retweeted: {
-    type: Boolean,
-   },
+   type: Boolean,
+   default: false,
+  },
   payload: {
    type: Object,
   },

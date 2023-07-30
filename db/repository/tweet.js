@@ -1,4 +1,5 @@
 import Model from "../model/tweet.js";
+import { success } from "../../utils/constants.js";
 
 const getAll = async () => {
  return await Model.find({});
@@ -7,7 +8,7 @@ const getAll = async () => {
 const getNonRetweet = async () => {
  return await Model.findOne({
   retweeted: false,
-  status: "success",
+  status: success,
  });
 };
 
@@ -15,24 +16,23 @@ const getTweet = async (tweet) => {
  return await Model.findOne({ tweet });
 };
 
-const addTweet = async (tweet, status, retweeted, payload) => {
+const addTweet = async (tweet, status, payload) => {
  return await Model.create({
   tweet,
   status,
-  retweeted,
   payload,
  });
 };
 
-const updateTweet = async (retweeted, id) => {
- await Model.findByIdAndUpdate(id, { retweeted: retweeted });
+const updateTweet = async (id) => {
+ await Model.findByIdAndUpdate(id, { retweeted: true });
 };
 
 const write = async () => {
  await Model.bulkWrite([
   {
    updateMany: {
-    filter: { status: "success" },
+    filter: { status: success },
     update: { retweeted: false },
    },
   },

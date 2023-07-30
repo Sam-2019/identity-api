@@ -4,6 +4,7 @@ import {
  updateTweet,
  getNonRetweet,
 } from "../db/repository/tweet.js";
+import { success, failed } from "../utils/constants.js";
 
 const client = new TwitterApi({
  appKey: process.env.TWITTER_API_KEY,
@@ -17,11 +18,11 @@ const sendTweet = async () => {
 
  try {
   const response = await client.v2.tweet(tweet);
-  await addTweet(tweet, "success", false, response);
-  //   console.log("post successful");
+  await addTweet(tweet, success, response);
+  //   console.log(success);
  } catch (e) {
-  await addTweet(tweet, "failed", false, e.data);
-  //   console.log("error");
+  await addTweet(tweet, failed, e.data);
+  //   console.log(failed);
  }
 };
 
@@ -31,11 +32,10 @@ const retweet = async (result) => {
  const entryID = result.id;
  try {
   await client.v2.retweet(data.id, tweetID);
-  await updateTweet(true, entryID);
-    // console.log("retweet successful");
+  await updateTweet(entryID);
+  // console.log(success);
  } catch (e) {
-  await updateTweet(false, entryID);
-    console.log("retweet failed");
+  console.log(failed);
  }
 };
 
