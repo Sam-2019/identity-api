@@ -16,7 +16,7 @@ async function stack(phone, accountCode) {
       data: paystackData.data,
     };
   } catch (error) {
-    return { data: null, message: error.error.message };
+    return { message: error.error.message, data: null };
   }
 }
 
@@ -54,8 +54,8 @@ async function caller(internationalNumber, regionCode) {
     };
   } catch (error) {
     return {
-      data: null,
       message: error,
+      data: null,
     };
   }
 }
