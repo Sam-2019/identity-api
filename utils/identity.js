@@ -1,7 +1,6 @@
 import Paystack from "paystack-api";
 import truecallerjs from "truecallerjs";
 import { TRUECALLER } from "../utils/config.js";
-import { tooManyRequests } from "./constants.js";
 
 const paystack = Paystack(process.env.NIMBLE);
 async function stack(phone, accountCode) {
@@ -21,36 +20,20 @@ async function stack(phone, accountCode) {
 }
 
 async function caller(internationalNumber, regionCode) {
+  const searchData = {
+    number: internationalNumber,
+    countryCode: regionCode,
+    installationId: TRUECALLER,
+    output: "JSON",
+  };
+
   try {
-    const { responseStatus, errorResp, data } = await truecallerjs.searchNumber(
-      {
-        number: internationalNumber,
-        countryCode: regionCode,
-        installationId: TRUECALLER,
-        output: "JSON",
-      }
-    );
-
-    if (errorResp === tooManyRequests) {
-      return {
-        data: null,
-        message: tooManyRequests,
-      };
-    }
-
-    if (responseStatus === "error") {
-      return {
-        data: null,
-        message: "error",
-      };
-    }
-
-    const info = JSON.stringify(data, null, 2);
-    const transformer = JSON.parse(info);
+    const response = await truecallerjs.search(searchData);
+    const { data } = response.json();
 
     return {
       message: null,
-      data: transformer[0],
+      data: data[0],
     };
   } catch (error) {
     return {

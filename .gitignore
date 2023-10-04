@@ -11,3 +11,5 @@ trash copy
 trashII.js
 trash copy 2
 error
+.yarn
+.DS_Store
