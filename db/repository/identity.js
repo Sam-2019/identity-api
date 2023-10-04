@@ -5,7 +5,7 @@ const getAll = async () => {
 };
 
 const getIdentity = async (phone) => {
- return await Model.findOne({ phone });
+ return await Model.findOne({ e164Format: phone });
 };
 
 const logView = async (data) => {

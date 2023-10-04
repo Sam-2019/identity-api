@@ -63,7 +63,7 @@ const webLookup = async ({ data, res, httpView = true }) => {
   const rfc3966 = transformedNumber.number.rfc3966;
   const internationalNumber = transformedNumber.number.e164;
   const regionCode = transformedNumber.regionCode;
-  const dbData = await checkDB(nationalNumber);
+  const dbData = await checkDB(internationalNumber);
 
   if (dbData.data) {
     return responseType(200, false, dbData.data, res, httpView);
