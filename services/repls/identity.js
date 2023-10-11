@@ -1,29 +1,39 @@
-import { getAll, getIdentity, logView } from "../../db/repository/identity.js";
+import {
+  getAll,
+  getIdentity,
+  logView,
+  fixCarrierMismatch,
+} from "../../db/repository/identity.js";
 
 class Identity {
- // text
- //  Identity.text()
- static text() {
-  return "test";
- }
+  // text
+  //  Identity.text()
+  static text() {
+    return "test";
+  }
 
- //  await user.get_users("xxxx")
- //  await User.get_user("xxxx")
- get_user(data) {
-  return getIdentity(data);
- }
+  //  await user.get_users("xxxx")
+  //  await User.get_user("xxxx")
+  get_user(data) {
+    return getIdentity(data);
+  }
 
- //  await user.get_users()
- //  await User.get_users()
- get_users() {
-  return getAll();
- }
+  //  await user.get_users()
+  //  await User.get_users()
+  get_users() {
+    return getAll();
+  }
 
- //  await user.logView("xxxx")
- //  await User.logView("xxxx")
- log_view(data) {
-  return logView(data);
- }
+  //  await user.logView("xxxx")
+  //  await User.logView("xxxx")
+  log_view(data) {
+    return logView(data);
+  }
+
+  //  await user.fixCarrierMismatch()
+  carrierMismatchCleanup() {
+    return fixCarrierMismatch();
+  }
 }
 
 export default Identity;
