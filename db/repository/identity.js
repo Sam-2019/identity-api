@@ -9,7 +9,6 @@ const getIdentity = async (phone) => {
 };
 
 const logView = async (data) => {
-    console.log({imress: data})
  await Model.findOneAndUpdate(
   { e164Format: data },
   { $inc: { impressionCount: 1 } },
