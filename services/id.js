@@ -144,6 +144,7 @@ const payload = (paystack, truecaller, info) => {
   };
 
   addIdentity(result);
+  logView(result.e164Format);
   return result;
 };
 
