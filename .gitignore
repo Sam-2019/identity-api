@@ -13,3 +13,10 @@ trash copy 2
 error
 .yarn
 .DS_Store
+services/telegraf/just_questions.js
+services/telegraf/map_questions_to_questions.js
+services/telegraf/questions.js
+services/telegraf/setup.js
+services/telegraf/trashII
+services/telegraf/trash
+services/telegraf/index copy.js
