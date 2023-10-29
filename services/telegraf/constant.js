@@ -537,8 +537,8 @@ export const faqs = [
     answer: "Yes, kindly see below\n\n• Osagyefo Hall\n• Yaa Asantewaa Hall\n• Mandela Hall\n• Sutherland Hall",
   },
   {
-    question: "Are there any social groups on campus?",
-    answer: "Hello Gifty, waiting for your response",
+    question: "Does UniMAC-IJ have social groups or clubs?",
+    answer: "We have the\n\n1.Debaters Club\n2.Media Information Literacy Club\n3.Campus Christian Family\n4.Pensa & GMSA Club",
   },
   {
     question:
