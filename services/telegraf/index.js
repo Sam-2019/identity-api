@@ -12,7 +12,7 @@ export const bot = new Telegraf(BOT_TOKEN);
 const filterByQuestion = (input) => {
   if (!input) return;
 
-  const result = faqs.filter((el) => el.question === input);
+  const result = faqs.filter((el) => el.question.toLowerCase() === input.toLowerCase());
   return result[0].answer;
 };
 

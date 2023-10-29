@@ -421,7 +421,7 @@ export const faqs = [
   {
     question: "How many faculties does UniMAC-IJ have?",
     answer:
-      "The Institute has,\n\n1. Faculty of Public Relations, Advertising & Marketing (FOPAM)\n2. Faculty of Journalism Media Studies (FOJOMS)\n3. Faculty of Integrated and Communication Sciences (FOICOS)\n4. School of Graduate Studies and Research (SOGSAR)\n5. School of Alternate Learning (SAL)",
+      "The Institute has\n\n1. Faculty of Public Relations, Advertising & Marketing (FOPAM)\n2. Faculty of Journalism Media Studies (FOJOMS)\n3. Faculty of Integrated and Communication Sciences (FOICOS)\n4. School of Graduate Studies and Research (SOGSAR)\n5. School of Alternate Learning (SAL)",
   },
   {
     question: "What are the library hours?",
@@ -454,6 +454,10 @@ export const faqs = [
   },
   {
     question: "What's the Student Wi-Fi password?",
+    answer: "Osu Campus:\n\nDzorwulu Campus: GIJ@W1f1",
+  },
+  {
+    question: "What is the Student Wi-Fi password?",
     answer: "Osu Campus:\n\nDzorwulu Campus: GIJ@W1f1",
   },
   {
@@ -495,6 +499,10 @@ export const faqs = [
     answer: "October 31st, 2023",
   },
   {
+    question: "When is the deadline for admission?",
+    answer: "October 31st, 2023",
+  },
+  {
     question: "How do I get my transcript?",
     answer:
       "Apply through academic affairs, pay an amount of 50 cedis, receive your transcript.",
@@ -510,7 +518,7 @@ export const faqs = [
   },
   {
     question: "Does the school have a website?",
-    answer: "Yes. https://gij.edu.gh/",
+    answer: "Yes.\n\nKindly visit https://gij.edu.gh",
   },
   {
     question: "When can students begin course registrations?",
@@ -525,8 +533,12 @@ export const faqs = [
     answer: "The date will be communicated.",
   },
   {
-    question: "Are there any social groups or halls on campus?",
-    answer: "Osagyefo Hall\nYaa Asantewaa Hall\nMandela Hall\nSutherland Hall",
+    question: "Are there any halls on campus?",
+    answer: "Yes, kindly see below\n\n• Osagyefo Hall\n• Yaa Asantewaa Hall\n• Mandela Hall\n• Sutherland Hall",
+  },
+  {
+    question: "Are there any social groups on campus?",
+    answer: "Hello Gifty, waiting for your response",
   },
   {
     question:
