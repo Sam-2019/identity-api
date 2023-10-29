@@ -549,3 +549,5 @@ export const welcomeMessage = (username) => {
 };
 
 export const salutations = ["hi", "Hi", "hello", "Hello"];
+
+export const unsupported_message = "I dont quite understand.";

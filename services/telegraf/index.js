@@ -1,4 +1,9 @@
-import { welcomeMessage, faqs, salutations } from "./constant.js";
+import {
+  welcomeMessage,
+  faqs,
+  salutations,
+  unsupported_message,
+} from "./constant.js";
 import { Telegraf } from "telegraf";
 import { BOT_TOKEN } from "../../utils/config.js";
 
@@ -27,7 +32,7 @@ bot.on("text", async (ctx) => {
       parse_mode: "Markdown",
     });
   } catch (error) {
-    ctx.reply("Unsupported questions");
+    ctx.reply(unsupported_message);
   }
 });
 
