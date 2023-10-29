@@ -426,7 +426,7 @@ export const faqs = [
   {
     question: "What are the library hours?",
     answer:
-      "Semester in session\n• Monday – Friday: 8:30 am – 7:30 pm\n• Saturday – Sunday: 10:00 am – 4:00 pm\n\nInter-semester break\nMonday – Friday: 8:30 am – 4:00 pm",
+      "Semester in session\n• Monday – Friday: 8:30 am – 7:30 pm\n• Saturday – Sunday: 10:00 am – 4:00 pm\n\nInter-semester break\n• Monday – Friday: 8:30 am – 4:00 pm",
   },
   {
     question: "How do I apply for financial aid on campus?",
@@ -445,16 +445,16 @@ export const faqs = [
   {
     question: "How do I reset my password for the student portal?",
     answer:
-      "https://students.unimac.edu.gh/login\n\n1. Click on the link to Log into your students' dashboard\n2. Click on Dropbox on the top left\n3. Select Password reset\n4. Follow prompts",
+      "Visit this link https://students.unimac.edu.gh/login\n\n1. Click on the link to Log into your students' dashboard\n2. Click on Dropbox on the top left\n3. Select Password reset\n4. Follow prompts",
   },
   {
     question: "How can I access the student portal?",
     answer:
-      "Click on this link https://students.unimac.edu.gh/login\nEnter your Student Identity Number and Password respectively in the spaces provided.\nYour default password is the same as your 'Student ID number'",
+      "Visit this link https://students.unimac.edu.gh/login\nEnter your Student Identity Number and Password respectively in the spaces provided.\n\nYour default password is the same as your 'Student ID number'",
   },
   {
     question: "What's the Student Wi-Fi password?",
-    answer: "Osu Campus:\nDzorwulu Campus: GIJ@W1f1",
+    answer: "Osu Campus:\n\nDzorwulu Campus: GIJ@W1f1",
   },
   {
     question: "When will the end-of-semester results be released?",
@@ -548,28 +548,4 @@ export const welcomeMessage = (username) => {
   return `Hello ${username},\n\nWelcome to UniMAC Campus Buddy.\nHow may I help you?`;
 };
 
-export const semester = [
-  {},
-  {
-    period: "Semester in session",
-    working_days: [
-      {
-        days: "Monday - Friday",
-        hours: "8:30 am - 7:30 pm",
-      },
-      {
-        days: "Saturday - Sunday",
-        hours: "10:00 am - 4:00 pm",
-      },
-    ],
-  },
-  {
-    period: "Inter-semester break",
-    working_days: [
-      {
-        days: "Monday - Friday",
-        hours: "8:30 am - 4:00 pm",
-      },
-    ],
-  },
-];
+export const salutations = ["hi", "Hi", "hello", "Hello"];

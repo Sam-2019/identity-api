@@ -1,4 +1,4 @@
-import { welcomeMessage, faqs } from "./constant.js";
+import { welcomeMessage, faqs, salutations } from "./constant.js";
 import { Telegraf } from "telegraf";
 import { BOT_TOKEN } from "../../utils/config.js";
 
@@ -13,30 +13,22 @@ const filterByQuestion = (input) => {
 
 bot.on("text", async (ctx) => {
   const text = ctx.message.text;
+  const username = ctx.message.chat.first_name;
+  const { entities } = ctx.message;
 
   try {
+    if (salutations.includes(text)) {
+      return ctx.reply(welcomeMessage(username));
+    }
+
     const findMatch = filterByQuestion(text);
-    return ctx.reply(findMatch);
+    return ctx.reply(findMatch, {
+      entities,
+      parse_mode: "Markdown",
+    });
   } catch (error) {
     ctx.reply("Unsupported questions");
   }
-});
-
-bot.hears("hi", (ctx) => {
-  const username = ctx.message.chat.first_name;
-  ctx.reply(welcomeMessage(username));
-});
-bot.hears("Hi", (ctx) => {
-  const username = ctx.message.chat.first_name;
-  ctx.reply(welcomeMessage(username));
-});
-bot.hears("hello", (ctx) => {
-  const username = ctx.message.chat.first_name;
-  ctx.reply(welcomeMessage(username));
-});
-bot.hears("Hello", (ctx) => {
-  const username = ctx.message.chat.first_name;
-  ctx.reply(welcomeMessage(username));
 });
 
 process.once("SIGINT", () => bot.stop("SIGINT"));
