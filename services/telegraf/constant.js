@@ -421,12 +421,12 @@ export const faqs = [
   {
     question: "How many faculties does UniMAC-IJ have?",
     answer:
-      "The Institute has\n\n1. Faculty of Public Relations, Advertising & Marketing (FOPAM)\n2. Faculty of Journalism Media Studies (FOJOMS)\n3. Faculty of Integrated and Communication Sciences (FOICOS)\n4. School of Graduate Studies and Research (SOGSAR)\n5. School of Alternate Learning (SAL)",
+      "*The Institute has*\n\n1. Faculty of Public Relations, Advertising & Marketing (FOPAM)\n2. Faculty of Journalism Media Studies (FOJOMS)\n3. Faculty of Integrated and Communication Sciences (FOICOS)\n4. School of Graduate Studies and Research (SOGSAR)\n5. School of Alternate Learning (SAL)",
   },
   {
     question: "What are the library hours?",
     answer:
-      "Semester in session\n• Monday – Friday: 8:30 am – 7:30 pm\n• Saturday – Sunday: 10:00 am – 4:00 pm\n\nInter-semester break\n• Monday – Friday: 8:30 am – 4:00 pm",
+      "*Semester in session*\n• Monday – Friday: 8:30 am – 7:30 pm\n• Saturday – Sunday: 10:00 am – 4:00 pm\n\n*Inter-semester break*\n• Monday – Friday: 8:30 am – 4:00 pm",
   },
   {
     question: "How do I apply for financial aid on campus?",
@@ -472,7 +472,7 @@ export const faqs = [
   {
     question: "How do I apply for admissions?",
     answer:
-      "HOW TO APPLY\n\n~ An applicant must pay the relevant application fee at any Fidelity Bank branch by providing the applicant's name and telephone number.\n~ You will be provided with your application number/ transaction ID at the bank that will grant you access to the Online Admission Portal.\nOr you visit the academic affairs at the Dzorwulu campus to pick up forms in person.",
+      "*HOW TO APPLY*\n\n~ An applicant must pay the relevant application fee at any Fidelity Bank branch by providing the applicant's name and telephone number.\n~ You will be provided with your application number/ transaction ID at the bank that will grant you access to the Online Admission Portal.\nOr you visit the academic affairs at the Dzorwulu campus to pick up forms in person.",
   },
   {
     question: "How do I get my student ID replaced?",
