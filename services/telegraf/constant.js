@@ -445,12 +445,12 @@ export const faqs = [
   {
     question: "How do I reset my password for the student portal?",
     answer:
-      "Visit this link https://students.unimac.edu.gh/login\n\n1. Click on the link to Log into your students' dashboard\n2. Click on Dropbox on the top left\n3. Select Password reset\n4. Follow prompts",
+      "Visit this [https://students.unimac.edu.gh/login](https://students.unimac.edu.gh/login)\n\n1. Click on the link to Log into your students' dashboard\n2. Click on Dropbox on the top left\n3. Select Password reset\n4. Follow prompts",
   },
   {
     question: "How can I access the student portal?",
     answer:
-      "Visit this link https://students.unimac.edu.gh/login\nEnter your Student Identity Number and Password respectively in the spaces provided.\n\nYour default password is the same as your 'Student ID number'",
+      "Visit this [https://students.unimac.edu.gh/login](https://students.unimac.edu.gh/login)\nEnter your Student Identity Number and Password respectively in the spaces provided.\n\nYour default password is the same as your 'Student ID number'",
   },
   {
     question: "What's the Student Wi-Fi password?",

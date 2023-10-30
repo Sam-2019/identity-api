@@ -2,10 +2,19 @@ import { Schema } from "mongoose";
 
 const dataSchema = new Schema(
   {
-    chatID: {
+    userID: {
+      type: String,
+    },
+    botID: {
       type: String,
     },
     question: {
+      type: String,
+    },
+    userInfo: {
+      type: String,
+    },
+    botInfo: {
       type: String,
     },
     impressionCount: {

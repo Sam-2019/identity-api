@@ -5,12 +5,12 @@ const getAll = async () => {
 };
 
 const addRecord = async (data) => {
-    return await Model.create(data);
-  };
+  return await Model.create(data);
+};
 
-const logView = async (data) => {
+const logView = async ({ userID, botID }) => {
   await Model.findOneAndUpdate(
-    { chatID: data },
+    { userID: userID, botID: botID },
     { $inc: { impressionCount: 1 } },
     { new: false }
   );

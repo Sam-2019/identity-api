@@ -24,13 +24,17 @@ bot.on("text", async (ctx) => {
   const username = ctx.message.chat.first_name;
   const { entities } = ctx.message;
 
-  const create = {
-    chatID: "1",
-    question: text,
+  const createInfo = {
+    userID: ctx.update.message.chat.id,
+    botID: ctx.botInfo.id,
+    question: ctx.update.message.text,
+    userInfo: ctx.update.message.chat,
+    botInfo: ctx.botInfo,
   };
 
-  const logger = {
-    chatID: "1",
+  const logInfo = {
+    userID: ctx.update.message.chat.id,
+    botID: ctx.botInfo.id,
   };
 
   try {
