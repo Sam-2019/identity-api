@@ -8,6 +8,13 @@ const addRecord = async (data) => {
   return await Model.create(data);
 };
 
+const findRecord = async ({ userID, question }) => {
+  return await Model.findOne({
+    userID: userID,
+    question: question,
+  });
+};
+
 const logView = async ({ userID, botID }) => {
   await Model.findOneAndUpdate(
     { userID: userID, botID: botID },
@@ -16,4 +23,4 @@ const logView = async ({ userID, botID }) => {
   );
 };
 
-export { getAll, addRecord, logView };
+export { getAll, addRecord, findRecord, logView };

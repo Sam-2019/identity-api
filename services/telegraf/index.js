@@ -6,7 +6,11 @@ import {
 } from "./constant.js";
 import { Telegraf } from "telegraf";
 import { BOT_TOKEN } from "../../utils/config.js";
-import { addRecord, logView } from "../../db/repository/telegraf.js";
+import {
+  addRecord,
+  findRecord,
+  logView,
+} from "../../db/repository/telegraf.js";
 
 export const bot = new Telegraf(BOT_TOKEN);
 
@@ -22,19 +26,23 @@ const filterByQuestion = (input) => {
 bot.on("text", async (ctx) => {
   const text = ctx.message.text;
   const username = ctx.message.chat.first_name;
+  const userID = ctx.update.message.chat.id;
+  const botID = ctx.botInfo.id;
+  const question = ctx.update.message.text;
+
   const { entities } = ctx.message;
 
   const createInfo = {
-    userID: ctx.update.message.chat.id,
-    botID: ctx.botInfo.id,
-    question: ctx.update.message.text,
+    userID: userID,
+    botID: botID,
+    question: question,
     userInfo: ctx.update.message.chat,
     botInfo: ctx.botInfo,
   };
 
   const logInfo = {
-    userID: ctx.update.message.chat.id,
-    botID: ctx.botInfo.id,
+    userID: userID,
+    botID: botID,
   };
 
   try {
@@ -43,6 +51,14 @@ bot.on("text", async (ctx) => {
     }
 
     const findMatch = filterByQuestion(text);
+    if (findMatch) {
+      await addRecord(createInfo);
+    }
+
+    const dbMatch = await findRecord(userID, question);
+    if (dbMatch) {
+      await logView(logInfo);
+    }
 
     return ctx.reply(findMatch, {
       entities,
