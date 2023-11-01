@@ -1,4 +1,4 @@
-import Model from "../model/telegraf.js";
+import Model from "../model/campus_buddy_bot.js";
 
 const getAll = async () => {
   return await Model.find({});

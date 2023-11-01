@@ -12,7 +12,7 @@ import {
   logView,
   addRecord,
   findRecord,
-} from "../../db/repository/telegraf.js";
+} from "../../db/repository/campus_buddy_bot.js";
 
 export const bot = new Telegraf(BOT_TOKEN);
 
