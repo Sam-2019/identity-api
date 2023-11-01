@@ -534,11 +534,13 @@ export const faqs = [
   },
   {
     question: "Are there any halls on campus?",
-    answer: "Yes, kindly see below\n\n• Osagyefo Hall\n• Yaa Asantewaa Hall\n• Mandela Hall\n• Sutherland Hall",
+    answer:
+      "Yes, kindly see below\n\n• Osagyefo Hall\n• Yaa Asantewaa Hall\n• Mandela Hall\n• Sutherland Hall",
   },
   {
     question: "Does UniMAC-IJ have social groups or clubs?",
-    answer: "We have the\n\n1.Debaters Club\n2.Media Information Literacy Club\n3.Campus Christian Family\n4.Pensa & GMSA Club",
+    answer:
+      "We have the\n\n1.Debaters Club\n2.Media Information Literacy Club\n3.Campus Christian Family\n4.Pensa & GMSA Club",
   },
   {
     question:
@@ -556,8 +558,45 @@ export const faqs = [
   },
 ];
 
+export const just_questions = [
+  "How many faculties does UniMAC-IJ have?",
+  "What are the library hours?",
+  "How do I apply for financial aid on campus?",
+  "What is the UniMAC-IJ campus address?",
+  "Any upcoming campus events?",
+  "How do I reset my password for the student portal?",
+  "How can I access the student portal?",
+  "What's the Student Wi-Fi password?",
+  "What is the Student Wi-Fi password?",
+  "When will the end-of-semester results be released?",
+  "How do I apply for scholarships on campus?",
+  "How do I apply for admissions?",
+  "How do I get my student ID replaced?",
+  "How do I file a complaint for missing scores?",
+  "How much does it cost to retake a course?",
+  "How much is SRC dues?",
+  "When is the deadline for admissions?",
+  "When is the deadline for admission?",
+  "How do I get my transcript?",
+  "Who is the Rector?",
+  "Who is the Dean of students?",
+  "Does the school have a website?",
+  "When can students begin course registrations?",
+  "What is the deadline for course registration for 2023/2024?",
+  "When is graduation for the 2023/2024 batch?",
+  "Are there any halls on campus?",
+  "Does UniMAC-IJ have social groups or clubs?",
+  "How long does it take to get my results resolved after complaining?",
+  "How do I report an abusive lecturer harassing me?",
+  "Are there any counsellors available?",
+];
+
 export const welcomeMessage = (username) => {
   return `Hello ${username},\n\nWelcome to UniMAC Campus Buddy.\nHow may I help you?`;
+};
+
+export const salutMessage = (username) => {
+  return `Hey there ${username},\n\nWelcome to UniMAC Campus Buddy.\nHow may I help you?`;
 };
 
 export const salutations = ["hi", "Hi", "hello", "Hello"];

@@ -8,16 +8,16 @@ const addRecord = async (data) => {
   return await Model.create(data);
 };
 
-const findRecord = async ({ userID, question }) => {
+const findRecord = async (userID, question) => {
   return await Model.findOne({
     userID: userID,
     question: question,
   });
 };
 
-const logView = async ({ userID, botID }) => {
+const logView = async (userID, botID, question) => {
   await Model.findOneAndUpdate(
-    { userID: userID, botID: botID },
+    { userID: userID, botID: botID, question: question },
     { $inc: { impressionCount: 1 } },
     { new: false }
   );
