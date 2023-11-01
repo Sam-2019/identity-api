@@ -1,38 +1,39 @@
 # frozen_string_literal: true
-require 'mina/rails'
-require 'mina/git'
-require 'mina/rvm'
-require_relative 'environment'
+
+require "mina/rails"
+require "mina/git"
+require "mina/rvm"
+require_relative "environment"
 
 # Basic settings:
-set :application_name, ENV['app'].to_s
-set :domain, ENV['domain'].to_s
-set :deploy_to, "#{ENV['home_dir']}/#{ENV['app']}"
-set :repository, ENV['repository'].to_s
-set :branch, 'master'
-set :rvm_use_path, '/usr/local/rvm/scripts/rvm'
+set :application_name, ENV["app"].to_s
+set :domain, ENV["domain"].to_s
+set :deploy_to, "#{ENV["home_dir"]}/#{ENV["app"]}"
+set :repository, ENV["repository"].to_s
+set :branch, "master"
+set :rvm_use_path, "/usr/local/rvm/scripts/rvm"
 
 set :execution_mode, :system
 set :init_system, :systemd
-set :service_unit_path, '/etc/systemd/system'
+set :service_unit_path, "/etc/systemd/system"
 
-set :shared_files, fetch(:shared_files, []).push('.env')
+set :shared_files, fetch(:shared_files, []).push(".env")
 
 # Optional settings:
 set :term_mode, :pretty
-set :user, ENV['user'].to_s
+set :user, ENV["user"].to_s
 
-desc 'sets ruby version'
+desc "sets ruby version"
 task :remote_environment do
-  invoke :'rvm:use', ENV['ruby_version'].to_s
+  invoke :"rvm:use", ENV["ruby_version"].to_s
 end
 
-desc 'set deployment directory'
+desc "set deployment directory"
 task :setup do
-  command %(mkdir -p #{ENV['home_dir']})
+  command %(mkdir -p #{ENV["home_dir"]})
 end
 
-desc 'Deploys the current app version to the server.'
+desc "Deploys the current app version to the server."
 task :deploy do
   deploy do
     comment "Deploying #{fetch(:application_name)} to #{fetch(:domain)}:#{fetch(:deploy_to)}}"
@@ -50,17 +51,17 @@ task :deploy do
   end
 end
 
-desc 'spits comments'
+desc "spits comments"
 task :restart do
-  comment 'Restart application'
+  comment "Restart application"
 end
 
-desc 'install yarn packages'
+desc "install yarn packages"
 task :yarn_install do
   command %(yarn install)
 end
 
-desc 'environment file'
+desc "environment file"
 task :create_env do
   in_path(fetch(:current_path)) do
     command %(touch .env)
@@ -68,73 +69,73 @@ task :create_env do
   end
 end
 
-desc 'start app'
+desc "start app"
 task :start_app do
   in_path(fetch(:current_path)) do
-    command %(pm2 start index.js --time --name #{ENV['app']})
+    command %(pm2 start index.js --time --name #{ENV["app"]})
     command %(pm2 save)
   end
 end
 
-desc 'start console'
+desc "start console"
 task console: :remote_environment do
   in_path(fetch(:current_path)) do
     command %(node console.js)
   end
 end
 
-desc 'restart app'
+desc "restart app"
 task :restart do
   in_path(fetch(:current_path)) do
-    command %(pm2 restart index.js --time --name #{ENV['app']})
+    command %(pm2 restart index.js --time --name #{ENV["app"]})
   end
 end
 
-desc 'shutdown app'
+desc "shutdown app"
 task :shutdown do
   in_path(fetch(:current_path)) do
     command %(pm2 stop 0)
-    # command %(pm2 stop --name #{ENV['app']})
+    # command %(pm2 stop --name #{ENV["app"]})
   end
 end
 
-desc 'delete app'
+desc "delete app"
 task :delete do
   command %(pm2 delete 0)
-  # command %(pm2 delete --name #{ENV['app']})
+  # command %(pm2 delete --name #{ENV["app"]})
 end
 
-desc 'show logs'
+desc "show logs"
 task logs: :remote_environment do
   command %(pm2 logs --time  0)
 end
 
-desc 'flush logs'
+desc "flush logs"
 task flush: :remote_environment do
   command %(pm2 flush 0)
 end
 
-desc 'pm2 cli dashboard'
+desc "pm2 cli dashboard"
 task pm2_dashboard: :remote_environment do
   command %(pm2 monit)
 end
 
-desc 'redis console'
+desc "redis console"
 task redis: :remote_environment do
-  command 'redis-cli'
+  command "redis-cli"
 end
 
-desc 'ngnix config'
+desc "ngnix config"
 task edit_config: :remote_environment do
-  command ENV['nginx'].to_s
+  command ENV["nginx"].to_s
 end
 
 task :restart_nginx do
-  queue 'sudo systemctl restart nginx'
+  queue "sudo systemctl restart nginx"
 end
 
-desc 'switch sms processor'
+desc "switch sms processor"
 task switch_sms_processor: :remote_environment do; end
 
-desc 'db backup'
+desc "db backup"
 task backup: :remote_environment do; end
