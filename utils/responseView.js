@@ -13,10 +13,10 @@ const httpResponse = (code, message, output, res) => {
 
 const consoleResponse = (message, output) => {
  if (message) {
-  console.log({ message: message, output: output });
+//   console.log({ message: message, output: output });
   return;
  }
- console.log({ output });
+//  console.log({ output });
  return;
 };
 
