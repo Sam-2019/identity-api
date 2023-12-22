@@ -16,6 +16,7 @@ set :rvm_use_path, "/usr/local/rvm/scripts/rvm"
 set :execution_mode, :system
 set :init_system, :systemd
 set :service_unit_path, "/etc/systemd/system"
+set :keep_releases, 2
 
 set :shared_files, fetch(:shared_files, []).push(".env")
 
