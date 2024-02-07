@@ -1950,6 +1950,7 @@ __metadata:
     redis: ^4.6.10
     sha1: ^1.1.1
     telegraf: ^4.14.0
+    telegram-keyboard: ^2.3.5
     truecallerjs: ^2.2.0
     twitter-api-v2: ^1.15.1
   languageName: unknown
@@ -3600,6 +3601,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"telegram-keyboard@npm:^2.3.5":
+  version: 2.3.5
+  resolution: "telegram-keyboard@npm:2.3.5"
+  dependencies:
+    typegram: ^5.2.0
+  checksum: 8328bd3b5cb530f0b9552aee2a2acebd7a02016d2282bf5e211ddefa3680410c1bb167e637bed0871d46c8e3e9d639d230c7f0455b8f82edaf6ad233af814d5e
+  languageName: node
+  linkType: hard
+
 "text-table@npm:^0.2.0":
   version: 0.2.0
   resolution: "text-table@npm:0.2.0"
@@ -3788,6 +3798,13 @@ __metadata:
     media-typer: 0.3.0
     mime-types: ~2.1.24
   checksum: 2c8e47675d55f8b4e404bcf529abdf5036c537a04c2b20177bcf78c9e3c1da69da3942b1346e6edb09e823228c0ee656ef0e033765ec39a70d496ef601a0c657
+  languageName: node
+  linkType: hard
+
+"typegram@npm:^5.2.0":
+  version: 5.2.0
+  resolution: "typegram@npm:5.2.0"
+  checksum: ff9a61c55ea2d8a3bdcad06e6b2013bdd506519aae72cb555162606d1b33a1c34651180fd7d2085b358d4c64d1016c75952fc3f021468921716e10b5dd8bf6a8
   languageName: node
   linkType: hard
 
