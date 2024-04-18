@@ -1,22 +1,5 @@
-import { parsePhoneNumber } from "awesome-phonenumber";
 import { AUTH_KEY } from "../utils/config.js";
-import {
-  getTelcoCode,
-  getTelcoName,
-  stackNotFound,
-  defaultMessage,
-  invalidNumber,
-  notFound,
-} from "../utils/constants.js";
-import { stack, caller } from "../utils/identity.js";
-import { transformText, getCountryName } from "../utils/transformer.js";
-import { getRandomItem } from "../utils/randomizer.js";
-import {
-  addIdentity,
-  getIdentity,
-  logView,
-} from "../db/repository/identity.js";
-
+import { defaultMessage } from "../utils/constants.js";
 import { webLookup } from "../services/id.js";
 
 const getID = async (req, res) => {
