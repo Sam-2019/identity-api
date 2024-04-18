@@ -100,9 +100,9 @@ task :shutdown do
   end
 end
 
-desc "delete app"
-task :delete do
-  command %(pm2 delete 0)
+desc "delete pm2 app"
+task :pm2_delete do
+  # command %(pm2 delete 0)
   # command %(pm2 delete --name #{ENV["app"]})
 end
 
